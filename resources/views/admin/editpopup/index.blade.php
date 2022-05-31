@@ -54,6 +54,25 @@
                 </script>
                 @endif
 
+                <div class="col-md-8">
+                    <div class="search mb-2">
+                        <form action="{{route('popupall')}}" method="get">
+
+                            <label for="search">FIND : </label>
+                                <select name="select" id="select" class="select" value="{{request()->query('search')}}">
+                                <option value="id">ID</option>
+                                <option value="content">CONTENT</option>
+                                </select>
+
+                       <input type="text" class="searchTerm p-3" placeholder="FIND HERE" name="search" value="{{request()->query('search')}}">
+                       <button type="submit" class="searchButton">
+                         <i class="fa fa-search mb-5"></i>
+                      </button>
+                    </form>
+
+                    </div>
+                </div>
+
                     <a href="{{route('addpopuppage')}}" class="btn btn-success mb-3 btn-lg">+ ADD POPUP</a>
 
                    
@@ -63,11 +82,13 @@
                         <table class="table table-bordered" >
                             <thead>
                               <tr>
-                                {{-- <th scope="col" class="text-center">ไอดี</th> --}}
-                                <th scope="col" class="text-center showtext">image</th>
-                                <th scope="col" class="text-center showtext">content</th>
-                                <th scope="col" class="text-center showtext">start</th>
-                                <th scope="col" class="text-center showtext">end</th>
+                                <th scope="col" class="text-center fs-5" style="width: 60px">@sortablelink('id', trans('ID'),)</th>
+                                <th scope="col" class="text-center showtext">IMAGE</th>
+                                <th scope="col" class="text-center showtext">CONTENT</th>
+                                <th scope="col" class="text-center showtext">START</th>
+                                <th scope="col" class="text-center showtext">END</th>
+                                <th scope="col" class="text-center showtext">@sortablelink('created_at', trans('CREATED AT'),)</th>
+
                                 <th scope="col" class="showtext text-center"style="width: 20px" >UPDATE</th>
                                 <th scope="col" class="showtext text-center" style="width: 20px">DELETE</th>
                               </tr>
@@ -75,7 +96,7 @@
                             <tbody>
                                 @foreach ($popup as $row)
                                 <tr>
-                                    {{-- <th class="text-center">{{$row->id}}</th> --}}
+                                    <th class="text-center">{{$row->id}}</th>
                                     <td>
                                         <img src="{{asset($row->image)}}" alt="" width="100px" height="100px " class="rounded mx-auto d-block">
                                     </td>
@@ -83,6 +104,7 @@
                                    
                                     <td class="text-center">{{$row->startDate}}</td>
                                     <td class="text-center">{{$row->endDate}}</td>
+                                    <td class="text-center">{{$row->created_at->diffForHumans()}}</td>
 
                                     <td ><a href="{{url('/popup/edit/'.$row->id)}}" style="width: auto" class="btn btn-warning btn-lg ">UPDATE</a></td>
                                     

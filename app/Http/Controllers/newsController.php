@@ -17,9 +17,15 @@ class newsController extends Controller
 {
     public function index()
     {
-        // $news= News::all();
+        $select = request()->query('select');
 
-        $news= News::paginate(5);
+        $search = request()->query('search');
+        if($search){
+            $news = News::where($select, 'LIKE', "%$search%")->paginate(5);
+        }else{
+            $news = News::sortable()->paginate(5);
+
+        }
 
         return view('admin.editnews.index',compact('news'));
     }

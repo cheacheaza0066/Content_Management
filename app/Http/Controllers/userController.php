@@ -17,11 +17,20 @@ class userController extends Controller
     public function index()
     {
         // $user= User::all();
+        $select = request()->query('select');
+
+        $search = request()->query('search');
+        if($search){
+            $user = User::where($select, 'LIKE', "%$search%")->paginate(7);
+        }else{
+            $user = User::sortable()->paginate(7);
+
+        }
         
-        $user = User::sortable()->paginate(7);
 
+        return view('admin.edituser.index')
+        ->with('user',$user);
 
-        return view('admin.edituser.index',compact('user'));
     }
 
 
@@ -155,6 +164,9 @@ class userController extends Controller
             return redirect()->route('admin.dashbord.user')->with('password',"อัพเดทข้อมูลเรียบร้อย");
         }
 
+
+        
+        
     
     
 }

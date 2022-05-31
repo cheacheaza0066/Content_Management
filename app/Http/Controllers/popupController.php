@@ -15,8 +15,15 @@ class popupController extends Controller
      */
     public function index()
     {
-        // $popup = Popup::all();
-        $popup= Popup::paginate(5);
+        $select = request()->query('select');
+
+        $search = request()->query('search');
+        if($search){
+            $popup = Popup::where($select, 'LIKE', "%$search%")->paginate(5);
+        }else{
+            $popup = Popup::sortable()->paginate(5);
+
+        }
 
         return view('admin.editpopup.index',compact('popup'));
     }

@@ -70,18 +70,53 @@
                                     })
                             </script>
                         @endif
+                    {{-- <div class="col-md-4">
+                        <div class="form-group">
+                            <form action="{{route('userall')}}" method="get">
+                                <div class="form-group">
+                                    <label for="name">FIND NAME</label>
+                                    <input type="text" name="search" class="form-control py-1" value="{{request()->query('search')}}">
+                                    <input type="submit" value="SUBMIT" class="btn btn-success btn-sm my-2">
 
+                                </div> 
+                            </form>
+                        </div>
+                    </div> --}}
+                    <div class="col-md-8">
+                        <div class="search mb-2">
+                            <form action="{{route('userall')}}" method="get">
+
+                                <label for="search">FIND : </label>
+                                    <select name="select" id="select" class="select" value="{{request()->query('search')}}">
+                                    <option value="id">ID</option>
+                                    <option value="name">NAME</option>
+                                    <option value="username">USERNAME</option>
+
+                                    <option value="email">EMAIL</option>
+                                    </select>
+
+                           <input type="text" class="searchTerm p-3" placeholder="FIND HERE" name="search" value="{{request()->query('search')}}">
+                           <button type="submit" class="searchButton">
+                             <i class="fa fa-search mb-5"></i>
+                          </button>
+                        </form>
+
+                        </div>
+                    </div>
+                      
+                  
+                        
                     <div class="card table-responsive">
                         <div class="card-header card text-dark  mb-1" style="background-color: rgba(37, 38, 49, 0.2)"><h4 class="showtexthead text-center">USER DETAIL</h4></div>
                         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                             <thead>
                                     <tr>
-                                        <th width="80px" class="showtext fs-5 " scope="col">@sortablelink('id')</th>
-                                        <th width="80px" class="showtext fs-5" scope="col">@sortablelink('name')</th>
-                                        <th class="showtext fs-5 " scope="col">@sortablelink('username')</th>
-                                        <th class="showtext fs-5" scope="col">Email</th>
-                                        <th class="showtext fs-5" scope="col">Roles</th>
-                                        <th class="showtext fs-5" scope="col">Status</th>
+                                        <th width="50px" class="sorting fs-5 " scope="col">@sortablelink('id', trans('ID'),)</th>
+                                        <th width="80px" class="sorting fs-5" scope="col">@sortablelink('name', trans('NAME'),)</th>
+                                        <th width="130px" class="sorting fs-5 " scope="col">@sortablelink('username', trans('USERNAME'),)</th>
+                                        <th class="showtext fs-5" scope="col">@sortablelink('email', trans('EMAIL'),)</th>
+                                        <th class="showtext fs-5" scope="col">@sortablelink('is_admin', trans('ROLES'),)</th>
+                                        <th class="showtext fs-5" scope="col">@sortablelink('isban', trans('STATUS'),)</th>
                                         <th class="showtext fs-5" scope="col">Update</th>
                                         <th class="showtext fs-5" scope="col">Delete</th>
                                     </tr>
@@ -112,6 +147,7 @@
                                             DELETE</td>
 
                                         </tr>
+                                        
                                         @endforeach
                                     
                                     
@@ -120,7 +156,11 @@
                                 </table>
                                 <div class="d-flex justify-content-center">
                                     {{-- {!! $user->links('pagination::bootstrap-4') !!}         --}}
-                                    {!! $user->appends(\Request::except('page'))->render() !!}
+                                    {{-- {!! $user->appends(\Request::except('page'))->render() !!} --}}
+                                    {{-- {!! $user->appends(['search'=>request()->query('search')])->links() !!} --}}
+                                    {{$user->appends(Request::all())->links();}}
+
+
 
                                 </div>
                                 
@@ -130,7 +170,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card">
+                    <div class="card" style="margin-top: 45px">
                         <div class="card-header card text-white bg-success mb-1"><h4 class="showtexthead text-center">FORM ADD USER</h4></div>
                         <div class="card-body">
                             <form action="{{route('adduser')}}" method="post">

@@ -15,7 +15,15 @@ class logActivity extends Controller
     public function index()
     {
         // $activity = Activity::all();
-        $activity= Activity::latest()->paginate(10);
+        $select = request()->query('select');
+
+        $search = request()->query('search');
+        if($search){
+            $activity = Activity::where($select, 'LIKE', "%$search%")->paginate(5);
+        }else{
+            $activity= Activity::latest()->paginate(10);
+
+        }
 
         return view('admin.log',compact('activity'));
     }

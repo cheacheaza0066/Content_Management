@@ -33,7 +33,7 @@ class User extends Authenticatable
         'isban',
     ];
 
-	public $sortable = ['id', 'name', 'username', 'created_at', 'updated_at'];
+	public $sortable = ['id', 'name', 'username','email' ,'is_admin','isban'];
 
     // LogActivity
     public function getActivitylogOptions(): LogOptions

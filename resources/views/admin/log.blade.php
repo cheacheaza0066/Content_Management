@@ -19,7 +19,29 @@
                     <li class="breadcrumb-item active" aria-current="page">Log</li>
                   </ol>
 
-                {{-- <h1 class="text-center">LOG</h1> --}}
+                <h1 class="text-center">LOG</h1>
+
+                <div class="col-md-8 my-2">
+                  <div class="search mb-2">
+                      <form action="{{route('log_all')}}" method="get">
+
+                          <label for="search">FIND : </label>
+                              <select name="select" id="select" class="select" value="{{request()->query('search')}}">
+                              <option value="id">ID</option>
+                              <option value="log_name ">LOGNAME</option>
+                              <option value="description ">Description</option>
+                              <option value="causer_id ">Causer_id</option>
+
+                              </select>
+
+                     <input type="text" class="searchTerm p-3" placeholder="FIND HERE" name="search" value="{{request()->query('search')}}">
+                     <button type="submit" class="searchButton">
+                       <i class="fa fa-search mb-5"></i>
+                    </button>
+                  </form>
+
+                  </div>
+              </div>
                 
                 <div class="col-md-12">
 
@@ -58,7 +80,8 @@
                             </tbody>
                           </table>
                           <div class="d-flex justify-content-center">
-                            {!! $activity->links() !!}
+                            {{$activity->appends(Request::all())->links();}}
+
                         </div>
                     </div>
                 </div>
