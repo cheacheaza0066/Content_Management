@@ -32,7 +32,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
 
 
-    
+    <style>
+        .navbar-sticky-top{
+       
+        background-color: #1e2021;
+        border-bottom: 2px solid rgb(186, 186, 186);
+    }
+    </style>
 
 </head>
 <body style="background-color:#eef5f9; " class="homepage">
@@ -84,15 +90,15 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 
                                 @if(auth()->user()->unreadnotifications->count())
-                                <a class="dropdown-item" style="color: green" href="{{route('markAsRead')}}">read all</a>
+                                <a class="dropdown-item p-2" style="color: green" href="{{route('markAsRead')}}">read all</a>
                                 @endif
                                 @forelse ( Auth::user()->unreadNotifications as $notification)
 
-                                <a class="dropdown-item" href="{{url('user/detailNoti/news/'.$notification->data['title'] )}}">
+                                <a class="dropdown-item p-2" href="{{url('user/detailNoti/news/'.$notification->data['title'] )}}">
                                     {{ $notification->data['title'] }}
                                 </a>    
                                 @empty
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item p-2" href="#">
                                     No notification
                                 </a>    
 
@@ -107,15 +113,15 @@
 
                             <li class="nav-item dropdown">
                                 
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle p-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->username }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a href="{{route('User.profile.edit')}}" class="dropdown-item">{{'Edit Profile'}}</a>
+                                        <a href="{{route('User.profile.edit')}}" class="dropdown-item p-2">{{'Edit Profile'}}</a>
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item p-2" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

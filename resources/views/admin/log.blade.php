@@ -57,6 +57,9 @@
                              
                             </tbody>
                           </table>
+                          <div class="d-flex justify-content-center">
+                            {!! $activity->links() !!}
+                        </div>
                     </div>
                 </div>
                 

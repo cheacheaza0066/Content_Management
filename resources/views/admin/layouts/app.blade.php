@@ -32,7 +32,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
-
+<style>
+    .navbar-sticky-top{
+   
+    background-color: #1e2021;
+    border-bottom: 2px solid rgb(186, 186, 186);
+}
+</style>
     <body class="homepage" >
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-sticky-top mb-3" style="  background: #edecf0;">
@@ -69,20 +75,27 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <a class="navbar-brand" href="{{ route('userall') }}">
-                            {{'Edit User'}}
-                        </a>
+                        <li class="center"><a class="navbar-brand" href="{{ route('userall') }}">
+                                    {{'Edit User'}}
+                            </a>
+                        </li>
+
+                        <li class="center">
+                            <a class="navbar-brand" href="{{ route('newsall') }}">
+                                {{'Edit News'}}
+                            </a>
+                        </li>
         
-                        <a class="navbar-brand" href="{{ route('newsall') }}">
-                            {{'Edit News'}}
-                        </a>
-        
-                        <a class="navbar-brand" href="{{ route('popupall') }}">
+                        <li class="center"><a class="navbar-brand" href="{{ route('popupall') }}">
                             {{'Edit popup'}}
-                        </a> 
+                        </a> </li>
+
+                            <li class=""> 
                         <a class="navbar-brand" href="{{ route('log_all') }}">
                             {{'LOG'}}
                         </a> 
+                            </li>
+                        
 
                         
                         {{-- <a class="navbar-brand" href="{{ route('admin.dashbord.user') }}">
@@ -114,16 +127,16 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @if(auth()->user()->unreadnotifications->count())
-                                <a class="dropdown-item" style="color: green" href="{{route('markAsRead')}}">read all</a>
+                                <a class="dropdown-item p-2" style="color: green" href="{{route('markAsRead')}}">read all</a>
                                 @endif
                                 
                                 @forelse ( Auth::user()->unreadNotifications as $notification)
-                                <a class="dropdown-item" href="{{url('admin/detailNoti/news/'.$notification->data['title'] )}}">
+                                <a class="dropdown-item p-2" href="{{url('admin/detailNoti/news/'.$notification->data['title'] )}}">
                                     {{ $notification->data['title'] }}
                                 </a>   
 
                                 @empty
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item p-2" href="#">
                                     No notification
                                 </a>    
                                
@@ -159,10 +172,10 @@
                                         {{'LOG'}}
                                     </a>  --}}
 
-                                    <a href="{{route('Admin.profile.edit')}}" class="dropdown-item">{{'Edit Profile'}}</a>
+                                    <a href="{{route('Admin.profile.edit')}}" class="dropdown-item p-2">{{'Edit Profile'}}</a>
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item p-2" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">
                                      {{ __('Logout') }}
@@ -180,6 +193,8 @@
                 </div>
             </div>
         </nav>
+
+      
 
         <main class="homepage">
             @yield('content')

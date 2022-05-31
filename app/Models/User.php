@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
@@ -15,7 +16,7 @@ use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,LogsActivity;
+    use HasApiTokens, HasFactory, Notifiable,LogsActivity,Sortable;
     
  
     /**
@@ -31,6 +32,8 @@ class User extends Authenticatable
         'is_admin',
         'isban',
     ];
+
+	public $sortable = ['id', 'name', 'username', 'created_at', 'updated_at'];
 
     // LogActivity
     public function getActivitylogOptions(): LogOptions

@@ -91,8 +91,9 @@
                              
                             </tbody>
                           </table>
-                          {{-- {!! $news->links() !!} --}}
-
+                          <div class="d-flex justify-content-center">
+                            {!! $news->links() !!}
+                        </div>
                     </div>
                 </div>
                 

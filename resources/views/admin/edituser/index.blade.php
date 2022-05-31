@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,6 +17,7 @@
     }
 </style>
     <title>Document</title>
+    
 </head>
 <body>
     <div class="py-12">
@@ -71,17 +73,17 @@
 
                     <div class="card table-responsive">
                         <div class="card-header card text-dark  mb-1" style="background-color: rgba(37, 38, 49, 0.2)"><h4 class="showtexthead text-center">USER DETAIL</h4></div>
-                                <table class="table table-bordered ">
-                                    <thead>
+                        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                            <thead>
                                     <tr>
-                                        <th class="showtext" scope="col">ID</th>
-                                        <th class="showtext" scope="col">Name</th>
-                                        <th class="showtext" scope="col">Username</th>
-                                        <th class="showtext" scope="col">EMAIL</th>
-                                        <th class="showtext" scope="col">ROLES</th>
-                                        <th class="showtext" scope="col">STATUS</th>
-                                        <th class="showtext" scope="col">UPDATE</th>
-                                        <th class="showtext" scope="col">Delete</th>
+                                        <th width="80px" class="showtext fs-5 " scope="col">@sortablelink('id')</th>
+                                        <th width="80px" class="showtext fs-5" scope="col">@sortablelink('name')</th>
+                                        <th class="showtext fs-5 " scope="col">@sortablelink('username')</th>
+                                        <th class="showtext fs-5" scope="col">Email</th>
+                                        <th class="showtext fs-5" scope="col">Roles</th>
+                                        <th class="showtext fs-5" scope="col">Status</th>
+                                        <th class="showtext fs-5" scope="col">Update</th>
+                                        <th class="showtext fs-5" scope="col">Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -114,15 +116,17 @@
                                     
                                     
                                     </tbody>
+
                                 </table>
-                                <div class="link">
-                                    {{$user->links()}}
+                                <div class="d-flex justify-content-center">
+                                    {{-- {!! $user->links('pagination::bootstrap-4') !!}         --}}
+                                    {!! $user->appends(\Request::except('page'))->render() !!}
 
                                 </div>
-
-                                {{-- {{$user->links()}} --}}
                                 
+
                     </div>
+                    
                 </div>
 
                 <div class="col-md-4">
@@ -209,4 +213,5 @@
 
 </body>
 </html>
+
 @endsection

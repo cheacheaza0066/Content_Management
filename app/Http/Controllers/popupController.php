@@ -15,7 +15,9 @@ class popupController extends Controller
      */
     public function index()
     {
-        $popup = Popup::all();
+        // $popup = Popup::all();
+        $popup= Popup::paginate(5);
+
         return view('admin.editpopup.index',compact('popup'));
     }
 

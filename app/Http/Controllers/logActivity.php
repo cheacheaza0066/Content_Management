@@ -14,7 +14,9 @@ class logActivity extends Controller
      */
     public function index()
     {
-        $activity = Activity::all();
+        // $activity = Activity::all();
+        $activity= Activity::latest()->paginate(10);
+
         return view('admin.log',compact('activity'));
     }
 
